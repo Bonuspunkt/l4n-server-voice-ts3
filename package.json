@@ -1,0 +1,62 @@
+{
+  "name": "l4n-server-voice-ts3",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore --ext js,jsx  .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bonuspunkt",
+  "license": "MIT",
+  "dependencies": {
+    "node-teamspeak-api": "^1.0.0"
+  },
+  "peerDependencies": {
+    "l4n-server": "*",
+    "react": "*",
+    "proptypes": "*"
+  },
+  "devDependencies": {
+    "eslint": "4.6.1",
+    "eslint-plugin-prettier": "^2.2.0",
+    "prettier": "^1.6.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "none"
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "printWidth": 100,
+          "singleQuote": true,
+          "tabWidth": 4,
+          "trailingComma": "all"
+        }
+      ]
+    }
+  }
+}
