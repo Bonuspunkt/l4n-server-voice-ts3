@@ -20,6 +20,7 @@
   "devDependencies": {
     "eslint": "4.6.1",
     "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-react": "^7.4.0",
     "prettier": "^1.6.1"
   },
   "eslintConfig": {
@@ -35,10 +36,12 @@
       }
     },
     "extends": [
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:react/recommended"
     ],
     "plugins": [
-      "prettier"
+      "prettier",
+      "react"
     ],
     "rules": {
       "no-unused-vars": [
@@ -56,6 +59,9 @@
           "tabWidth": 4,
           "trailingComma": "all"
         }
+      ],
+      "react/prop-types": [
+        "warn"
       ]
     }
   }

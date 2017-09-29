@@ -3,17 +3,21 @@ module.exports = resolve => {
     const { host, voicePort } = ts3;
 
     const ts3Repo = resolve('ts3Repo');
-    const mappings = ts3Repo.all();
 
     const store = resolve('publicStore');
-    store.dispatch(state => ({
-        ...state,
-        ts3: { host, voicePort },
-        lobbies: state.lobbies.map(lobby => ({
-            ...lobby,
-            cid: mappings.find(m => m.lobbyId === lobby.id).cid,
-        })),
-    }));
+    store.dispatch(state => {
+        const maps = ts3Repo.all().map(({ lobbyId, cid }) => ({ [lobbyId]: cid }));
+        const mappings = Object.assign({}, ...maps);
+
+        return {
+            ...state,
+            ts3: { host, voicePort },
+            lobbies: state.lobbies.map(lobby => ({
+                ...lobby,
+                cid: mappings[lobby.id],
+            })),
+        };
+    });
 
     ts3Repo.on('mapped', ({ lobbyId, cid }) => {
         store.dispatch(state => ({

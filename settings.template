@@ -1,0 +1,8 @@
+    ts3: {
+        host: 'localhost',
+        queryPort: 10011,
+        voicePort: 9987,
+        login: 'query',
+        password: 'EGDJaPFR',
+        sid: 1,
+    },
