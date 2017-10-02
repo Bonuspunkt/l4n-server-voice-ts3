@@ -7,6 +7,6 @@ module.exports = ({ resolve, register }) => {
     const ts3Repo = new Ts3Repo(resolve);
     register('ts3Repo', () => ts3Repo);
 
-    require('./glue/lobbyToTs3')(resolve);
-    require('./glue/ts3ToStore')(resolve);
+    require('./glue/lobbyRepoToTs3')(resolve);
+    require('./glue/ts3RepoToStore')(resolve);
 };

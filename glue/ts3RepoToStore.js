@@ -1,6 +1,5 @@
 module.exports = resolve => {
-    const { ts3 } = resolve('settings');
-    const { host, voicePort } = ts3;
+    const { ts3: { host, voicePort } } = resolve('settings');
 
     const ts3Repo = resolve('ts3Repo');
 

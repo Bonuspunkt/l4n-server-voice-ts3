@@ -1,3 +1,5 @@
+const debug = require('debug')('l4n:server:ts3:glue:lobbyRepoToTs3');
+
 const initRootChannel = async client => {
     let channelList = await client.send('channellist');
     if (!Array.isArray(channelList)) channelList = [channelList];
@@ -17,12 +19,10 @@ const initRootChannel = async client => {
 };
 
 module.exports = async resolve => {
-    const ts3Repo = resolve('ts3Repo');
-
-    const client = resolve('ts3Client');
-    const rootChannel = await initRootChannel(client);
-
     const lobbyRepo = resolve('lobbyRepo');
+    const ts3Client = resolve('ts3Client');
+    const ts3Repo = resolve('ts3Repo');
+    const rootChannel = await initRootChannel(ts3Client);
 
     lobbyRepo.on('create', async lobby => {
         const getChannelName = (() => {
@@ -38,12 +38,15 @@ module.exports = async resolve => {
 
         while (!channelCreated) {
             try {
-                const { cid } = await client.send('channelcreate', {
-                    channel_name: getChannelName(),
+                const channelName = getChannelName();
+                const { cid } = await ts3Client.send('channelcreate', {
+                    channel_name: channelName,
                     channel_flag_permanent: 1,
                     cpid: rootChannel.cid,
                 });
                 channelCreated = true;
+
+                debug(`created '${channelName}' - cid '${cid}'`);
 
                 ts3Repo.insert({ lobbyId: lobby.id, cid });
             } catch (e) {
@@ -55,6 +58,9 @@ module.exports = async resolve => {
 
     lobbyRepo.on('destroy', async lobbyId => {
         const { cid } = ts3Repo.byLobbyId(lobbyId);
-        await client.send('channeldelete', { cid, force: 1 });
+
+        debug(`deleted cid '${cid}' - lobbyId '${lobbyId}'`);
+
+        await ts3Client.send('channeldelete', { cid, force: 1 });
     });
 };
