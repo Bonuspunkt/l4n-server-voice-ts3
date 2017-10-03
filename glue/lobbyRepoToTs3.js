@@ -57,7 +57,10 @@ module.exports = async resolve => {
     });
 
     lobbyRepo.on('destroy', async lobbyId => {
-        const { cid } = ts3Repo.byLobbyId(lobbyId);
+        const { cid } = ts3Repo.byLobbyId(lobbyId) || {};
+        if (!cid) {
+            return debug(`lobby '${lobbyId}' has no mapped channel`);
+        }
 
         debug(`deleted cid '${cid}' - lobbyId '${lobbyId}'`);
 
