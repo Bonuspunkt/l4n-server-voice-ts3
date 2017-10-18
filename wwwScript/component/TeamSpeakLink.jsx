@@ -4,8 +4,9 @@ import PropTypes from 'proptypes';
 const TeamSpeakLink = ({ ts3, lobby, user }) => {
     if (!lobby.cid) return null;
 
-    const { host = '', port = '' } = ts3;
+    if (!lobby.users.includes(user.id)) return null;
 
+    const { host = '', port = '' } = ts3;
     const ts3Link = `ts3server://${host}?port=${port}&cid=${lobby.cid}&nickname=${user.name}`;
 
     return (
