@@ -1,7 +1,7 @@
 {
   "name": "l4n-server-voice-ts3",
-  "version": "0.5.0",
-  "description": "",
+  "version": "1.0.0-rc.1",
+  "description": "automatic setup voice channel for lobbies and add a link to join them to the lobby screen",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ext js,jsx  .",
@@ -64,5 +64,17 @@
         "warn"
       ]
     }
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bonuspunkt/l4n-server-voice-ts3.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Bonuspunkt/l4n-server-voice-ts3/issues"
+  },
+  "homepage": "https://github.com/Bonuspunkt/l4n-server-voice-ts3#readme"
 }
